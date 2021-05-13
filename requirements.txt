@@ -1,4 +1,4 @@
-Flask
+Flask==1.12
 Flask-RESTful
 Flask-JWT
 Flask-SQLAlchemy

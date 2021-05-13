@@ -45,5 +45,11 @@ api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 
 if __name__ == "__main__":
+    # Run method before first request into app
+    # NEED TO IMPORT ALL MODELS SO DB CAN CREATE TABLE
+    @app.before_first_request
+    def create_tables():
+
+    db.create_all()
     db.init_app(app)
     app.run(port=5000, debug=True)
