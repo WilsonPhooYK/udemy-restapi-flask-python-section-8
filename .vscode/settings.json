@@ -1,0 +1,24 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "editor.tabSize": 4,
+    "python.analysis.useImportHeuristic": true,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUnknownMemberType": "warning",
+    },
+    "python.formatting.provider": "black",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}\\venv\\Lib\\site-packages",
+    ],
+    "python.linting.pylintPath": "${workspaceFolder}\\venv\\Scripts\\pylint",
+    "python.linting.pylintUseMinimalCheckers": false,
+
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_flask_sqlalchemy, pylint_flask",
+        "--init-hook",
+        "import sys; sys.path.insert(0, '${workspaceFolder}')"
+    ],
+    "python.linting.flake8Enabled": false
+}
