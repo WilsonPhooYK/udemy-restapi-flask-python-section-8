@@ -40,7 +40,7 @@ def check_if_token_in_blocklist(_decrypted_header: Any, decrypted_body: Any):
 # The following callbacks are used for customizing jwt response/error messages.
 # The original ones may not be in a very pretty format (opinionated)
 @jwt.expired_token_loader
-def expired_token_callback():
+def expired_token_callback(_decrypted_header: Any, _decrypted_body: Any):
     return cast(Any, jsonify({
         'description': 'The token has expired.',
         'error': 'token_expired'
