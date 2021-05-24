@@ -1,7 +1,13 @@
 from dataclasses import dataclass
+from typing import TypedDict
 from db import db
 
 Model = db.Model
+
+UserModelType = TypedDict('UserModelType', {
+    'id': int,
+    'username': str,
+})
 
 @dataclass
 class UserModel(Model):
@@ -15,14 +21,20 @@ class UserModel(Model):
         # Must have id to authenticate
         self.username = username
         self.password = password
+        
+    def json(self) -> UserModelType:
+        return {
+            'id': self.id,
+            'username': self.username
+        }
 
     @classmethod
-    def find_by_username(cls, username: str):
+    def find_by_username(cls, username: str) -> "UserModel":
         # SELECT * FROM items WHERE username=username LIMIT 1
         return cls.query.filter_by(username=username).first()
 
     @classmethod
-    def find_by_id(cls, _id: int):
+    def find_by_id(cls, _id: int) -> "UserModel":
         # SELECT * FROM items WHERE id=_id LIMIT 1
         return cls.query.filter_by(id=_id).first()
     

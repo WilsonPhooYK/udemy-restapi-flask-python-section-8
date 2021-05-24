@@ -45,4 +45,4 @@ class Store(Resource):
     
 class StoreList(Resource):
     def get(self) -> tuple[list[StoreModelType], int]:
-        return [store.json() for store in StoreModel.query.all()], 200
+        return [store.json() for store in StoreModel.find_all()], 200

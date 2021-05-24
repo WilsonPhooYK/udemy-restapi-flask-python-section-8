@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from db import db
-from typing import TypedDict, Optional
+from typing import Any, TypedDict, Optional
 from models.item import ItemModelType
 from typings.sql_alchemy import QueryModel
 
@@ -38,6 +38,10 @@ class StoreModel(Model):
     def find_by_name(cls, name: str) -> Optional['StoreModel']:
         # SELECT * FROM items WHERE name=name LIMIT 1
         return cls.query.filter_by(name=name).first()
+    
+    @classmethod
+    def find_all(cls) -> Any:
+        return cls.query.all()
 
     def save_to_db(self):
         db.session.add(self)

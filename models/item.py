@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from db import db
-from typing import TypedDict, Optional
+from typing import Any, TypedDict, Optional
 
 ItemModelType = TypedDict(
     "ItemModelType",
@@ -8,6 +8,7 @@ ItemModelType = TypedDict(
         "name": str,
         "price": float,
         "store_id": int,
+        'id': int,
     },
 )
 
@@ -32,12 +33,21 @@ class ItemModel(Model):
         self.store_id = store_id
 
     def json(self) -> ItemModelType:
-        return {'name': self.name, 'price': self.price, 'store_id': self.store_id}
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'store_id': self.store_id
+        }
     
     @classmethod
     def find_by_name(cls, name: str) -> Optional['ItemModel']:
         # SELECT * FROM items WHERE name=name LIMIT 1
         return cls.query.filter_by(name=name).first()
+    
+    @classmethod
+    def find_all(cls) -> Any:
+        return cls.query.all()
 
     def save_to_db(self):
         db.session.add(self)

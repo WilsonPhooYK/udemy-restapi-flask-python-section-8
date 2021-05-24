@@ -5,6 +5,7 @@
     "python.analysis.useImportHeuristic": true,
     "python.analysis.diagnosticSeverityOverrides": {
         "reportUnknownMemberType": "warning",
+        "reportUntypedFunctionDecorator": "warning",
     },
     "python.formatting.provider": "black",
     "python.analysis.extraPaths": [
